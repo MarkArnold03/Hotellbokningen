@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hotellbokningen.Data
+namespace Hotellbokningen.Controllers
 {
-    public class GetRooms
+    public class Delete
     {
-
     }
 }
