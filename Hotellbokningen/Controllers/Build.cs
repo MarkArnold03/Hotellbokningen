@@ -28,7 +28,7 @@ namespace Hotellbokningen.Controllers
                 dataInitializer.MigrateAndSeed(dbContext);
                
 
-                // dbContext.Database.Migrate();
+                dbContext.Database.Migrate();
             }
 
             var dbContextReturned = new HotelDatabase(options.Options);

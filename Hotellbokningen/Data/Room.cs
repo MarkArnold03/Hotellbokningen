@@ -22,6 +22,8 @@ namespace Hotellbokningen.Data
             throw new NotImplementedException();
         }
 
+       
+
         public static int ShowRoomMenu()
         {
             Console.WriteLine("1. List rooms");

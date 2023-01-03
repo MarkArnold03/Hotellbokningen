@@ -25,7 +25,7 @@ namespace Hotellbokningen
         {
             if (!optionsBuilder.IsConfigured)
             {
-                 optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=HotelBooking;Trusted_Connection=True;");
+                 optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=HotelBookingen;Trusted_Connection=True;TrustServerCertificate=true;MultipleActiveResultSets=true");
             }
            
         }

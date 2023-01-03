@@ -40,7 +40,7 @@ namespace Hotellbokningen.Data
         {
             
                 var customers = dbContext.Customers;
-                foreach (var customer in customers)
+                foreach (var customer in customers.OrderBy(c=>c.CustomerId))
                 {
                     Console.WriteLine($"ID: {customer.CustomerId} | Name: {customer.Name} | Email: {customer.Email} | Phone: {customer.PhoneNumber}");
                 }
