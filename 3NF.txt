@@ -1,0 +1,4 @@
+Först så skapade jag appsettings och sen skapade jag också en builder med config. Där efter så skapade jag en application dbcontext som hete hotel database.
+Därefter så skapade jag klasserna jag behövde.
+Så efter jag gjorde en migration som la till mina klasser i kolumner och där efter skapade en datainitializer och gjorde en update migration 
+med info från min data initializer.
