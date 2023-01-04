@@ -38,10 +38,9 @@ namespace Hotellbokningen.Data
             return option;
         }
 
-        public static void ListRooms()
+        public static void ListRooms(HotelDatabase context)
         {
-            using (var context = new HotelDatabase())
-            {
+           
                 // Get a list of rooms from the database
                 var rooms = context.Rooms.ToList();
 
@@ -52,13 +51,12 @@ namespace Hotellbokningen.Data
                 {
                     Console.WriteLine($"{room.RoomId}\t{room.Type}\t{room.RoomNumber}\t{room.ExtraBeds}");
                 }
-            }
+            Console.ReadLine();
         }
 
-        public static void AddRoom()
+        public static void AddRoom(HotelDatabase context)
         {
-            using (var context = new HotelDatabase())
-            {
+            
                 // Prompt the user for room information
                 Console.Write("Enter room type (single or double): ");
                 RoomType type;
@@ -90,13 +88,12 @@ namespace Hotellbokningen.Data
                 context.SaveChanges();
 
                 Console.WriteLine("Room added successfully.");
-            }
+            
         }
 
-        public static void UpdateRoom()
+        public static void UpdateRoom(HotelDatabase context)
         {
-            using (var context = new HotelDatabase())
-            {
+           
                 // Prompt the user for the ID of the room to update
                 Console.Write("Enter the ID of the room to update: ");
                 var id = int.Parse(Console.ReadLine());
@@ -122,14 +119,13 @@ namespace Hotellbokningen.Data
                 context.SaveChanges();
 
                 Console.WriteLine("Room updated successfully.");
-            }
+            
         }
 
 
-        public static void DeleteRoom()
+        public static void DeleteRoom(HotelDatabase context)
         {
-            using (var context = new HotelDatabase())
-            {
+           
                 // Prompt the user for the ID of the room to delete
                 Console.Write("Enter the ID of the room to delete: ");
                 var id = int.Parse(Console.ReadLine());
@@ -147,7 +143,7 @@ namespace Hotellbokningen.Data
                 context.SaveChanges();
 
                 Console.WriteLine("Room deleted successfully.");
-            }
+            
         }
 
         public enum RoomType

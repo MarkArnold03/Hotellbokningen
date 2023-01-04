@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hotellbokningen.Migrations
 {
     [DbContext(typeof(HotelDatabase))]
-    [Migration("20230103122614_HotelBookingen")]
-    partial class HotelBookingen
+    [Migration("20230103140939_HotellBookingen")]
+    partial class HotellBookingen
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -12,7 +12,7 @@ namespace Hotellbokningen
     {
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<HotelBooking> HotelBookings { get; set; }
+        public DbSet<HotelBooking> Bookings { get; set; }
         public HotelDatabase()
         {
 

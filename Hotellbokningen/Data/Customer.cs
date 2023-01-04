@@ -19,9 +19,8 @@ namespace Hotellbokningen.Data
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
 
-        public ICollection<Booking> Bookings { get; set; }
 
-        public HotelDatabase dbContext { get; set; } = new HotelDatabase();
+        
         public static int ShowCustomerMenu()
         {
             Console.WriteLine("1. List Customer");
@@ -36,21 +35,20 @@ namespace Hotellbokningen.Data
             return option;
         }
 
-        public  void ListCustomers()
+        public  void ListCustomers(HotelDatabase context)
         {
             
-                var customers = dbContext.Customers;
-                foreach (var customer in customers.OrderBy(c=>c.CustomerId))
+                var customers = context.Customers.ToList();
+                foreach (var customer in customers)
                 {
                     Console.WriteLine($"ID: {customer.CustomerId} | Name: {customer.Name} | Email: {customer.Email} | Phone: {customer.PhoneNumber}");
                 }
-            
+            Console.ReadLine();
         }
 
-        public static void AddCustomer()
+        public static void AddCustomer(HotelDatabase context)
         {
-            using (var context = new HotelDatabase())
-            {
+            
                 Console.Write("Enter Customer name: ");
                 var name = Console.ReadLine();
                 Console.Write("Enter customer email: ");
@@ -67,13 +65,12 @@ namespace Hotellbokningen.Data
 
                 context.Add(customer);
                 context.SaveChanges();
-            }
+            
         }
 
-        public static void UpdateCustomer()
+        public static void UpdateCustomer(HotelDatabase context)
         {
-            using (var context = new HotelDatabase())
-            {
+            
                 Console.Write("Enter Customer ID: ");
                 var id = int.Parse(Console.ReadLine());
                 var customer = context.Customers.Find(id);
@@ -92,13 +89,12 @@ namespace Hotellbokningen.Data
 
                 context.Customers.Update(customer);
                 context.SaveChanges();
-            }
+            
         }
 
-        public static void DeleteCustomer()
+        public static void DeleteCustomer(HotelDatabase context)
         {
-            using (var context = new HotelDatabase())
-            {
+           
                 Console.Write("Enter Customer ID: ");
                 var id = int.Parse(Console.ReadLine());
                 var customer = context.Customers.Find(id);
@@ -108,8 +104,8 @@ namespace Hotellbokningen.Data
                     return;
                 }
 
-                // Check if the guest has any bookings
-                var bookings = context.HotelBookings.Where(b => b.CustomerId == customer.CustomerId).ToList();
+                
+                var bookings = context.Bookings.Where(b => b.CustomerId == customer.CustomerId).ToList();
                 if (bookings.Any())
                 {
                     Console.WriteLine("Cannot delete customer because they have bookings.");
@@ -118,7 +114,7 @@ namespace Hotellbokningen.Data
 
                 context.Customers.Remove(customer);
                 context.SaveChanges();
-            }
+            
         }
 
     }

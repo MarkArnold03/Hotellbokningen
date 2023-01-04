@@ -41,19 +41,19 @@ namespace Hotellbokningen
                             {
                                 case 1:
                                     Console.Clear();
-                                    Room.ListRooms();
+                                    Room.ListRooms(dbContext);
                                     break;
                                 case 2:
                                     Console.Clear();
-                                    Room.AddRoom();
+                                    Room.AddRoom(dbContext);
                                     break;
                                 case 3:
                                     Console.Clear();
-                                    Room.UpdateRoom();
+                                    Room.UpdateRoom(dbContext);
                                     break;
                                 case 4:
                                     Console.Clear();
-                                    Room.DeleteRoom();
+                                    Room.DeleteRoom(dbContext);
                                     break;
                                 case 5:
                                     break;
@@ -85,19 +85,19 @@ namespace Hotellbokningen
                                 case 1:
                                     Console.Clear();
                                     var customer = new Customer();
-                                    customer.ListCustomers();
+                                    customer.ListCustomers(dbContext);
                                     break;
                                 case 2:
                                     Console.Clear();
-                                    Customer.AddCustomer();
+                                    Customer.AddCustomer(dbContext);
                                     break;
                                 case 3:
                                     Console.Clear();
-                                    Customer.UpdateCustomer();
+                                    Customer.UpdateCustomer(dbContext);
                                     break;
                                 case 4:
                                     Console.Clear();
-                                    Customer.DeleteCustomer();
+                                    Customer.DeleteCustomer(dbContext);
                                     break;
                                 case 5:
                                     break;
