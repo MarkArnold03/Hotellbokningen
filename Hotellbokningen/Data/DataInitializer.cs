@@ -112,6 +112,7 @@ namespace Hotellbokningen.Data
             {
                 dbContext.Customers.Add(new Customer
                 {
+                    
                     Name = "Bob Johnson",
                     Email = "bob@example.com",
                     PhoneNumber = "123-456-7892",
@@ -122,7 +123,7 @@ namespace Hotellbokningen.Data
             {
                 dbContext.Customers.Add(new Customer
                 {
-                    //CustomerId = 4,
+                    
                     Name = "Sally Smith",
                     Email = "sally@example.com",
                     PhoneNumber = "123-456-7893",

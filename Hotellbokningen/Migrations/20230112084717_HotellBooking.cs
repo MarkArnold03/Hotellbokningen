@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Hotellbokningen.Migrations
 {
-    public partial class HotellBookingen : Migration
+    public partial class HotellBooking : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,59 +40,27 @@ namespace Hotellbokningen.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Booking",
-                columns: table => new
-                {
-                    BookingId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    GuestId = table.Column<int>(type: "int", nullable: false),
-                    RoomId = table.Column<int>(type: "int", nullable: false),
-                    CheckInDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CheckOutDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsCheckedIn = table.Column<bool>(type: "bit", nullable: false),
-                    IsCheckedOut = table.Column<bool>(type: "bit", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Booking", x => x.BookingId);
-                    table.ForeignKey(
-                        name: "FK_Booking_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Booking_Rooms_RoomId",
-                        column: x => x.RoomId,
-                        principalTable: "Rooms",
-                        principalColumn: "RoomId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "HotelBookings",
+                name: "Bookings",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    Nights = table.Column<int>(type: "int", nullable: false),
                     RoomId = table.Column<int>(type: "int", nullable: false),
-                    CheckInDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CheckOutDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    DateStart = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateEnd = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HotelBookings", x => x.Id);
+                    table.PrimaryKey("PK_Bookings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_HotelBookings_Customers_CustomerId",
+                        name: "FK_Bookings_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
                         principalColumn: "CustomerId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_HotelBookings_Rooms_RoomId",
+                        name: "FK_Bookings_Rooms_RoomId",
                         column: x => x.RoomId,
                         principalTable: "Rooms",
                         principalColumn: "RoomId",
@@ -100,33 +68,20 @@ namespace Hotellbokningen.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Booking_CustomerId",
-                table: "Booking",
+                name: "IX_Bookings_CustomerId",
+                table: "Bookings",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Booking_RoomId",
-                table: "Booking",
-                column: "RoomId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_HotelBookings_CustomerId",
-                table: "HotelBookings",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_HotelBookings_RoomId",
-                table: "HotelBookings",
+                name: "IX_Bookings_RoomId",
+                table: "Bookings",
                 column: "RoomId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Booking");
-
-            migrationBuilder.DropTable(
-                name: "HotelBookings");
+                name: "Bookings");
 
             migrationBuilder.DropTable(
                 name: "Customers");

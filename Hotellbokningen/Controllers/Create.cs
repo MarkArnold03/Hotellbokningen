@@ -41,7 +41,7 @@ namespace Hotellbokningen.Controllers
                         //RoomType = roomType,
                         //NumNights = numNights,
                 };
-                context.HotelBookings.Add(booking);
+                context.Bookings.Add(booking);
                 context.SaveChanges();
                 Console.WriteLine("Booking created successfully.");
            }

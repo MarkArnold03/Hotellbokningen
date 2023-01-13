@@ -31,10 +31,10 @@ namespace Hotellbokningen
 
                         while (true)
                         {
-                           Console.Clear();
+                            Console.Clear();
 
                             // Read the user's choice
-                            var roomChoice =  Room.ShowRoomMenu();
+                            var roomChoice = Room.ShowRoomMenu();
 
                             // Handle the user's choice
                             switch (roomChoice)
@@ -70,14 +70,14 @@ namespace Hotellbokningen
                         }
                         break;
                     case 2:
-                        // Display the guests menu
+
                         while (true)
                         {
                             Console.Clear();
-                           
+
 
                             // Read the user's choice
-                            var customerChoice =  Customer.ShowCustomerMenu();
+                            var customerChoice = Customer.ShowCustomerMenu();
 
                             // Handle the user's choice
                             switch (customerChoice)
@@ -113,9 +113,38 @@ namespace Hotellbokningen
                             }
                         }
                         break;
+                    case 3:
+
+                        while (true)
+                        {
+                            Console.Clear();
+                            var customerChoice = HotelBooking.ShowBookingsMenu();
+
+
+                            switch (customerChoice)
+                            {
+                                case 1:
+                                    Console.Clear();
+                                    HotelBooking.CreateBooking(dbContext);
+                                    break;
+                                case 2:
+                                    Console.Clear();
+                                    HotelBooking.ShowBookings(dbContext);
+                                    break;
+                            }
+                            if (customerChoice == 3)
+                            {
+                                Console.Clear();
+                                break;
+                            }
+
+                        }
+                        break;
+
+                   }
+
                 }
             }
-        }
 
+        }
     }
-}

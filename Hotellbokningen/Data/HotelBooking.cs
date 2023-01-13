@@ -11,7 +11,6 @@ namespace Hotellbokningen.Data
     public class HotelBooking
     {
         public int Id { get; set; }
-        public int Nights { get; set; }
         public int RoomId { get; set; }
         public int CustomerId { get; set; }
         public Customer CustomerBooking { get; set; }
@@ -31,12 +30,12 @@ namespace Hotellbokningen.Data
             return option;
         }
 
-        public void CreateBooking(HotelDatabase dbContext)
+        public static void CreateBooking(HotelDatabase dbContext)
         {
             var bookingToCreate = new HotelBooking();
 
             Console.Clear();
-            Console.WriteLine(" How many days would you like to rent the car?");
+            Console.WriteLine(" How many days are you staying?");
             int numberOfDays = Convert.ToInt32(Console.ReadLine());
 
             bookingToCreate.DateStart = new DateTime(2001, 01, 01, 23, 59, 59);
@@ -105,7 +104,7 @@ namespace Hotellbokningen.Data
             {
                 
                 Console.WriteLine("\n\n\n These rooms are available for booking");
-                Console.WriteLine("\n Id\tRoomNummber\t\tRoomType\t\tExtraBeds\t\tModel");
+                Console.WriteLine("\n Id\tRoomNummber\t\tRoomType\t\tExtraBeds");
                 Console.WriteLine(" ==================================================================");
 
                 foreach (var room in availableRooms.OrderBy(r => r.RoomId))
@@ -118,9 +117,16 @@ namespace Hotellbokningen.Data
             
             Console.WriteLine("\n Please choose a room");
             int roomBooking = Convert.ToInt32(Console.ReadLine());
-            bookingToCreate.RoomBooking = dbContext.Rooms
-                .Where(c => c.RoomId == roomBooking)
-                .FirstOrDefault();
+            bookingToCreate.RoomBooking = dbContext.Rooms.Where(c => c.RoomId == roomBooking).FirstOrDefault();
+
+            Console.WriteLine("\n Choose the customer staying");
+            foreach(var customer in dbContext.Customers)
+            {
+                Console.WriteLine($"{customer.CustomerId} {customer.Name} {customer.Email} {customer.PhoneNumber}");
+            }
+            var customerBooking = Convert.ToInt32(Console.ReadLine());
+            bookingToCreate.CustomerBooking = dbContext.Customers.Where(c => c.CustomerId == customerBooking).FirstOrDefault();
+
 
             dbContext.Add(bookingToCreate);
             dbContext.SaveChanges();
@@ -138,7 +144,7 @@ namespace Hotellbokningen.Data
             Console.ReadLine();
         }
 
-        public void ShowBookings(HotelDatabase dbContext)
+        public static void ShowBookings(HotelDatabase dbContext)
         {
 
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -149,7 +155,10 @@ namespace Hotellbokningen.Data
             Console.WriteLine("       ---------------------------------------------------------- ");
 
             if (dbContext.Bookings.Count() == 0)
+            {
                 Console.WriteLine("\nNo bookings found");
+            }
+               
             else
             {
                 var bookingData = dbContext.Bookings.Include(r => r.RoomBooking).Include(g => g.CustomerBooking);

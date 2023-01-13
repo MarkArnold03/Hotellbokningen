@@ -22,44 +22,6 @@ namespace Hotellbokningen.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Hotellbokningen.Data.Booking", b =>
-                {
-                    b.Property<int>("BookingId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"), 1L, 1);
-
-                    b.Property<DateTime>("CheckInDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CheckOutDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GuestId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsCheckedIn")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsCheckedOut")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BookingId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("RoomId");
-
-                    b.ToTable("Booking");
-                });
-
             modelBuilder.Entity("Hotellbokningen.Data.Customer", b =>
                 {
                     b.Property<int>("CustomerId")
@@ -95,17 +57,14 @@ namespace Hotellbokningen.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("CheckInDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CheckOutDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Nights")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("DateEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateStart")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("RoomId")
                         .HasColumnType("int");
@@ -116,7 +75,7 @@ namespace Hotellbokningen.Migrations
 
                     b.HasIndex("RoomId");
 
-                    b.ToTable("HotelBookings");
+                    b.ToTable("Bookings");
                 });
 
             modelBuilder.Entity("Hotellbokningen.Data.Room", b =>
@@ -141,47 +100,23 @@ namespace Hotellbokningen.Migrations
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("Hotellbokningen.Data.Booking", b =>
-                {
-                    b.HasOne("Hotellbokningen.Data.Customer", "Customer")
-                        .WithMany("Bookings")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Hotellbokningen.Data.Room", "Room")
-                        .WithMany()
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Room");
-                });
-
             modelBuilder.Entity("Hotellbokningen.Data.HotelBooking", b =>
                 {
-                    b.HasOne("Hotellbokningen.Data.Customer", "Customer")
+                    b.HasOne("Hotellbokningen.Data.Customer", "CustomerBooking")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Hotellbokningen.Data.Room", "Room")
+                    b.HasOne("Hotellbokningen.Data.Room", "RoomBooking")
                         .WithMany()
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
+                    b.Navigation("CustomerBooking");
 
-                    b.Navigation("Room");
-                });
-
-            modelBuilder.Entity("Hotellbokningen.Data.Customer", b =>
-                {
-                    b.Navigation("Bookings");
+                    b.Navigation("RoomBooking");
                 });
 #pragma warning restore 612, 618
         }
